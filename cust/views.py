@@ -1,15 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.utils.timezone import datetime
-from .models import Showings,Screen,Booking,PaymentDetails
 import datetime
+from .models import Showings,Screen,Booking,PaymentDetails
 
-#Define prices of tickets.
-ticketPrices = { "adult": 10,
-"student": 7.5,
-"child": 5}
 
-# Create your views here.
+#state the price of ech type of tickets
+ticketPrices = { "adult": 10, "student": 7.5, "child": 5}
+
+#Create view
 def home(request):
     return render(request, "cust/base.html")
 
@@ -75,37 +74,37 @@ def booking(request, selectedDate):
             print("Screen insufficient seats available.")
             return redirect('selectDate')
 
-        #send them to payment screen
+        #direct payment screen
         return redirect('payment',adultQuantity=adultQuantity, studentQuantity=studentQuantity, childQuantity=childQuantity, selectedShowing=selectedShowing)
         
     return redirect('booking',selectedDate=selectedDate)
 
 def payment(request,adultQuantity, studentQuantity, childQuantity, selectedShowing):
     if request.method == "GET":
-        #get selected showing
+        #get selected movie
         try:
             show = Showings.objects.get(id=selectedShowing)
         except Showings.DoesNotExist:
             print("didn't find show")
             return redirect('home')
 
-        #if showing is not found then send them back (validation)
         if show is None:
             print("didn't find show")
             return redirect('home')
-        #load payment page and load in showing for display.
         return render(request, "cust/payment.html",
         {
             'show': show,
         })
+
     if request.method == "POST":
-        #get payment details from HTML form.
+
+        #get card details from user
         cardholderName = request.POST['cardholderName']
         cardNumber = request.POST['cardNumber']
         expiryDate = request.POST['expiryDate']
         cardType = request.POST['cardType']
 
-        #find whether payment details have been used before, otherwise save them
+        #if payment details have not been used it will save it
         try:
             existingPayment = PaymentDetails.objects.get(existingPayment = PaymentDetails.objects.get(cardholderName=cardholderName, cardNumber=cardNumber, expiryDate=expiryDate, cardType=cardType))
         except PaymentDetails.DoesNotExist:
@@ -113,22 +112,21 @@ def payment(request,adultQuantity, studentQuantity, childQuantity, selectedShowi
             newPayment.save()
             existingPayment = newPayment
 
-        #get selected showing
+        #get selected movie
         try:
             getShowing = Showings.objects.get(id=selectedShowing)
         except PaymentDetails.DoesNotExist:
             return redirect("home")
             
-        #calculate total cost of booking
+        #calculate the cost of booking
         totalCost = ((adultQuantity * ticketPrices["adult"]) + (studentQuantity * ticketPrices["student"]) + (childQuantity * ticketPrices["child"]))
 
-        #calculate total number of tickets sold for booking and save them to DB
         getShowing.ticketsSold += (adultQuantity + studentQuantity + childQuantity)
         getShowing.save()
 
-        #Save new booking to DB
+        #save booking to DB
         newBooking = Booking(showingRef = getShowing, ticketQuantity = (adultQuantity + studentQuantity + childQuantity), totalCost = totalCost, paymentRef=existingPayment)
         newBooking.save()
 
-        #Back to home page
+        #direct home page
         return redirect("home")
