@@ -5,7 +5,7 @@ Click on the following to the each sub-header:-
 [CRUD Operators](#crud-operators)<br />
 
 ## How to Run
-1) Make sure the project is opened as directory in VSCode terminal
+1) Make sure the project is opened as directory in VSCode terminal<br />
 if you downloaded the .zip folder it should be in :-
 ```
 ../foonyeecust
