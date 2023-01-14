@@ -4,8 +4,7 @@ from django.utils.timezone import datetime
 import datetime
 from .models import Showings,Screen,Booking,PaymentDetails
 
-
-#state the price of ech type of tickets
+#state the price of each type of tickets
 ticketPrices = { "adult": 10, "student": 7.5, "child": 5}
 
 #Create view
@@ -15,18 +14,17 @@ def home(request):
 def selectDate(request):
     #get list of dates of showings and sort them.
     getDates = Showings.objects.values('showingDate').distinct().order_by('showingDate')
-    #Format dates for display and parameter passing.
     showingDates = []
     for dates in getDates:
         showingDates.append(dates['showingDate'].strftime('%d-%m-%Y'))
 
     if request.method == "POST":
-        #get selected date
+        #get the selected date
         selectedDate = request.POST['showingDate']
-        #pass date to booking view
+        #pass the date to the booking view
         return redirect('booking',selectedDate=selectedDate)
         
-    #load list of dates into HTML page.
+    #load the list of dates into HTML
     return render(request, "cust/showingDates.html",
         {
             'showingDates': showingDates,
@@ -34,11 +32,10 @@ def selectDate(request):
 
 def booking(request, selectedDate):
     if request.method == "GET":
-        #receive date passed in and reformat for DB functions
         receivedDate = datetime.datetime.strptime(selectedDate, "%d-%m-%Y").date()
-        #get showings on selected date.
+        #get movie on selected date.
         getShowings = Showings.objects.filter(showingDate = receivedDate)
-        #pass date, showings, and ticket prices into HTML page for display
+        #pass date, movie, and ticket prices into HTML
         return render(request, "cust/booking.html",
         {
             'selectedDate': selectedDate,
@@ -48,20 +45,19 @@ def booking(request, selectedDate):
             'ticketPriceChild': ticketPrices['child'],
         })
     if request.method == "POST":
-        #Get booking details from HTML form
         adultQuantity = request.POST['adultQuantity']
         studentQuantity = request.POST['studentQuantity']
         childQuantity = request.POST['childQuantity']
         selectedShowing = request.POST['selectedShowing']
 
-        #get booking from DB based on what the user has selected.
+        #get booking from DB based on what the user has selected
         show = Showings.objects.get(id = selectedShowing)
 
         print(selectedShowing)
 
-        #get cinema screen for selected showing.
+        #get cinema screen for selected showing
         screenCap = Screen.objects.get(id=show.screen_id)
-        #calculate total number of tickets.
+        #calculate total number of tickets
         totalTickets = (int(adultQuantity) + int(studentQuantity) + int(childQuantity))
 
         #if the user hasn't selected any tickets, send them back
