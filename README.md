@@ -6,7 +6,10 @@ Click on the following to the each sub-header:-
 
 ## How to Run
 1) Make sure the project is opened as directory in VSCode terminal
-if you downloaded the .zip folder it should be ../foonyeecust
+if you downloaded the .zip folder it should be in :-
+```
+../foonyeecust
+```
 
 2) Run this line in the VSCode terminal to build image based from the Dockerfile
 ```
