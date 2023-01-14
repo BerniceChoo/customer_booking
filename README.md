@@ -1,5 +1,5 @@
 # UWEFlix - DESD Student
-The program will allow customer to purchase advanced tickets)<br />
+The program will allow customer to purchase advanced tickets<br />
 
 Click on the following to the each sub-header:-  
 [How to Run](#how-to-run)<br />
