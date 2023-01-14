@@ -132,6 +132,3 @@ def payment(request,adultQuantity, studentQuantity, childQuantity, selectedShowi
 
         #Back to home page
         return redirect("home")
-
-def sampleData(request):
-    return HttpResponse("DB")
