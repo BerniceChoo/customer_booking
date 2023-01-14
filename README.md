@@ -1,9 +1,8 @@
 # UWEFlix
 
 Click on the following to the each sub-header:-  
-[Task 1](#how-to-run)<br />
-[Task 2](#crum-operators)<br />
-[Task 3](#task-3)<br />
+[How to Run](#how-to-run)<br />
+[CRUD Operators](#crud-operators)<br />
 
 ## How to Run
 1) Make sure the project is opened as directory in VSCode terminal
@@ -27,4 +26,5 @@ This is how it will look on a web brower:-
 ![taskone](images/foonyeecust.png)
 
 ## CRUD Operators
+
 ![taskone](images/sc.png)
