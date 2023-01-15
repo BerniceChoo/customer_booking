@@ -2,7 +2,7 @@
 
 
 Make sure the project is opened as directory in VSCode terminal
-if you downloaded the .zip folder it should be in : "../foonyeecust"
+if you downloaded the .zip folder it should be in : "../foonyeecust-main"
 
 
 1) Run the below line in the VSCode terminal to build image based from the Dockerfile
