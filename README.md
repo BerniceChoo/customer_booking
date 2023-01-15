@@ -12,8 +12,9 @@ make sure to copy and paste the below to the web browser after running the 2 lin
 ```
 127.0.0.1:8000
 ```
-This is how it will look on a web brower:-
+This is how it will look on a web brower and docker:-
 ![foonyeecust](images/foonyeecust.png)
+![foonyeecust](images/docker.png)
 
 ## CRUD Operators
 The term "CRUD" refers to the four operations that are thought to be required to develop a persistent storage application: creation, read, update, and delete. It originates from the area of computer programming. Any data storage device, such as a solid-state drive or a hard disc, that keeps power after the device is turned off is referred to as persistent storage.
