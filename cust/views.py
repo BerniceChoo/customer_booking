@@ -4,8 +4,8 @@ from django.utils.timezone import datetime
 import datetime
 from .models import Showings,Screen,Booking,PaymentDetails
 
-#state the price of each type of tickets
-ticketPrices = { "adult": 10, "student": 7.5, "child": 5}
+#the price of each type of tickets
+ticketPrices = { "adult": 7.5, "student": 5, "child": 3.5}
 
 #Create view
 def home(request):
