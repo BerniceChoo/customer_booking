@@ -5,22 +5,10 @@ Click on the following to the each sub-header:-
 [How to Run](#how-to-run)<br />
 [CRUD Operators](#crud-operators)<br />
 
-## How to Run
-1) Make sure the project is opened as directory in VSCode terminal<br />
-if you downloaded the .zip folder it should be in : "../foonyeecust"
+## How to run
+Please read instruction.txt for the instruction
 
-
-2) Run this line in the VSCode terminal to build image based from the Dockerfile
-```
-docker build -t desdcustomerslim:1.0 .
-``` 
-
-3) Run this line to start/run the container
-```
-docker run -p 8000:8000 desdcustomerslim:1.0
-```
-
-4) copy and paste the below to the web browser
+make sure to copy and paste the below to the web browser after running the 2 lines in the terminal:- 
 ```
 127.0.0.1:8000
 ```
